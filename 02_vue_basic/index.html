@@ -1,0 +1,29 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- vue.js 설치 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 마크업에서 Vue인스턴스 사용 -->
+      <h1>{{name}}의 소개</h1>
+      <input type="text" v-model="name" />
+    </div>
+
+    <script>
+      // Vue 인스턴스 생성
+      const jinheeVue = new Vue({
+        // vue 관리 영역
+        el: '#app',
+        // 내가 원하는 데이터 입력
+        data: { name: 'jinhee' },
+      });
+    </script>
+  </body>
+</html>
