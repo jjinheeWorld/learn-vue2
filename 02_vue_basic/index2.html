@@ -1,0 +1,53 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>진희 소개</h1>
+      <p>저는 {{age}}살입니다.</p>
+      <button v-on:click="increase">증가</button>
+      <button v-on:click="decrease">감소</button>
+    </div>
+
+    <script>
+      const jinheeVue = new Vue({
+        el: '#app',
+        data: { age: 27 },
+        methods: {
+          increase() {
+            this.age++;
+          },
+          decrease() {
+            this.age--;
+          },
+        },
+        beforeCreate() {
+          console.log('1. 지금 인스턴스 생성 전');
+        },
+        created() {
+          console.log('2. 지금 인스턴스 생성을 마침');
+        },
+        beforeMount() {
+          console.log('3. 진짜 돔과 연결되기 전');
+        },
+        mounted() {
+          console.log('4. 진짜 돔과 연결된 후');
+        },
+        beforeUpdate() {
+          console.log('5. 데이터가 변하고, 돔이 바뀌기 전');
+        },
+        updated() {
+          console.log('6. 데이터가 변하고, 돔이 바뀐 후');
+        },
+      });
+      console.log(jinheeVue);
+    </script>
+  </body>
+</html>
