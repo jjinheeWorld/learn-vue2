@@ -1,0 +1,65 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Mustache 안에서는 '식'만 사용할 수 있다. 삼항연산자 ⭕️ -->
+
+      <!-- 함수를 실행할 수 있다. -->
+      <h1>{{aboutMe}} {{tellName('이진희')}}</h1>
+      <!-- 배열과 객체에도 접근할 수 있다. -->
+      <!-- <p>저는 {{age}}세이며, {{age > 19? '성인' : '청소년'}}입니다.</p> -->
+      <p>
+        저는 {{age}}세이며, {{state}}입니다. 그리고 저의 취미는 {{likes}}입니다.
+      </p>
+      <button v-on:click="increase">증가</button>
+      <button v-on:click="decrease">감소</button>
+    </div>
+
+    <script>
+      const jinheeVue = new Vue({
+        el: '#app',
+        data: {
+          age: 27,
+          like: ['공부하기', '여행', '영화'],
+        },
+        computed: {
+          aboutMe() {
+            const name = '진희';
+            return name + '의 정보';
+          },
+          state() {
+            if (this.age > 19) return '성인';
+            else return '청소년';
+          },
+          likes() {
+            let result = '';
+            this.like.forEach((item) => {
+              result += ' ' + item;
+            });
+            return result;
+          },
+        },
+        methods: {
+          increase() {
+            this.age++;
+          },
+          decrease() {
+            this.age--;
+          },
+          tellName(name) {
+            console.log(`저의 이름은 ${name}입니다.`);
+          },
+        },
+      });
+      console.log(jinheeVue);
+    </script>
+  </body>
+</html>
