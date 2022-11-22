@@ -1,0 +1,48 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 배열 -->
+      <ul>
+        <!-- vue v-for는 for in문에 index 사용할 수 있다.
+             v-for에는 v-bind:key가 필수적으로 사용된다.
+             v-bind는 데이터를 연결할 때 사용한다.
+             li 안에 있는 모든 태그들은 item과 i를 사용할 수 있다. -->
+        <li v-for="(item, i) in items" v-bind:key="i">
+          {{i + ':' + item.msg}}
+
+          <div>안녕{{item.msg}}</div>
+        </li>
+      </ul>
+      <!-- 객체 -->
+      <!-- 여기서 name은 obj의 title, author, data를 가리킨다. -->
+      <ul>
+        <li v-for="(item, name, i) in obj" v-bind:key="name">
+          {{i}}, {{name}} : {{item}}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const jinheeVue = new Vue({
+        el: '#app',
+        data: {
+          items: [{ msg: 'hi' }, { msg: 'bye' }],
+          obj: {
+            title: '오늘은 진희 생일이다.',
+            author: '코코몽리포터',
+            data: '2022-11-23',
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
