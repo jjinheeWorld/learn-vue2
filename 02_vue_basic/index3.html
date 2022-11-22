@@ -1,0 +1,56 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div class="vanilla">
+      <h1><span>name</span>의 소개</h1>
+      이름 : <input type="text" class="v-model" value="jinhee" />
+    </div>
+
+    <script>
+      const target = document.querySelector('.vanilla');
+      const spanEl = document.querySelector('span');
+      const inputEl = document.querySelector('.v-model');
+
+      const data = {
+        get name() {
+          return inputEl.value;
+        },
+        set name(str) {
+          spanEl.textContent = str;
+        },
+      };
+
+      spanEl.textContent = data.name;
+      inputEl.addEventListener('keyup', (e) => {
+        data.name = inputEl.value;
+      });
+
+      // getter와 setter
+      const person = {
+        firstName: 'jinhee',
+        lastName: 'lee',
+        get fullName() {
+          return `${this.firstName} ${this.lastName}`;
+        },
+        set fullName(name) {
+          const part = name.split(' ');
+          person.firstName = part[0];
+          person.lasttName = part[0];
+        },
+      };
+      // getter
+      console.log(person.fullName);
+      // setter
+      person.fullName = 'jinhee lee';
+      console.log(person.firstName);
+    </script>
+  </body>
+</html>
