@@ -1,0 +1,30 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 만약 state === '제목'이면 true이므로 '소제목입니다.' -->
+      <div v-if="state === '제목'"><h3>소제목입니다.</h3></div>
+      <!-- 만약 state === '링크'면 true이므로 '링크입니다.' -->
+      <div v-else-if="state === '링크'"><a href="">링크입니다.</a></div>
+      <!-- state가 '제목'과 '링크' 둘다 아니면 '설명하는 글입니다.' -->
+      <div v-else><p>설명하는 글입니다.</p></div>
+    </div>
+
+    <script>
+      const jinheeVue = new Vue({
+        el: '#app',
+        data: {
+          state: '링크', // 제목, 링크, 설명
+        },
+      });
+    </script>
+  </body>
+</html>
