@@ -1,0 +1,34 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="state === '제목'">
+        <label>사용자 이름</label>
+        <h3 key="title">소제목입니다.</h3>
+      </div>
+      <div v-else>
+        <label>사용자 이름</label>
+        <a href="" key="link">링크입니다.</a>
+      </div>
+      <!-- state === '제목'이 false라면 p태그는 display: none; 처리가 된다. -->
+      <p v-show="state === '제목'">문장입니다.</p>
+    </div>
+
+    <script>
+      const jinheeVue = new Vue({
+        el: '#app',
+        data: {
+          state: '제목', // 제목, 링크
+        },
+      });
+    </script>
+  </body>
+</html>
