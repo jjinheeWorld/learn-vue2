@@ -25,7 +25,13 @@ a {text-decoration:none; color:white}
 }
 
 /* movie */
+.movie ol {
+	overflow: hidden;
+	width: 600px;
+	margin: 0 auto;
+}
 .movie li {
+	float: left;
 	position: relative;
 	border: 1px solid rgba(255, 255, 255, .2);
 	width: 127px;

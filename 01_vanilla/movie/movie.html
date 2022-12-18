@@ -9,20 +9,7 @@
   </head>
   <body>
     <div class="movie">
-      <ol class="list">
-        <li>
-          <a href="">
-            <h4 class="hide">남애의 여름밤</h4>
-            <span class="hide rate rate0">전체관람가</span>
-            <strong class="rank">1</strong>
-            <img class="poster" src="images/mov_1.jpg" alt="남애의 여름밤" />
-            <span class="desc">
-              <i class="star"><b style="width: 94%"></b></i>
-              <em class="score">9.43</em>
-            </span>
-          </a>
-        </li>
-      </ol>
+      <ol class="list"></ol>
     </div>
     <script>
       // 1. 아래 데이터들을 받는 다고 했을때
@@ -34,7 +21,7 @@
 
       // 3. 평점순으로 소팅해서 화면에 랜더링하세요. arr.sort()를 이용하세요.
 
-      const rateMach = {
+      const rateMatch = {
         0: '전체관람가',
         12: '12세이상 관람가',
         15: '15세이상 관람가',
@@ -124,6 +111,41 @@
           week: 83777,
         },
       ];
+
+      rederMovie(rateMatch, movies);
+      function rederMovie(matchTable, data) {
+        // 1. rate 정보를 "rate: [15, '15세이상 관람가']"로 만든다.
+        for (let i = 0; i < data.length; i++) {
+          data[i].rate = [data[i].rate, matchTable[data[i].rate]];
+        }
+
+        // 2. movies 배열을 평점순으로 재배열한다.
+        data.sort((a, b) => b.score - a.score);
+
+        // 3. 돔 렌더링을 한다.
+        const movieOlEl = document.querySelector('.movie > ol');
+        data.forEach((item, i) => {
+          movieOlEl.insertAdjacentHTML(
+            'beforeend',
+            `
+          <li>
+            <a href="">
+              <h4 class="hide">${item.name}</h4>
+              <span class="hide rate rate${item.rate[0]}">
+                ${item.rate[1]}
+              </span>
+              <strong class="rank">${i + 1}</strong>
+              <img class="poster" src="${item.src}" alt="${item.name}" />
+              <span class="desc">
+                <i class="star"><b style="width: ${item.score * 10}%"></b></i>
+                <em class="score">${item.score}</em>
+              </span>
+            </a>
+          </li>
+        `
+          );
+        });
+      }
     </script>
   </body>
 </html>
