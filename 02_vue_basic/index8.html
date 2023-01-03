@@ -1,0 +1,110 @@
+<!-- CDN -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- vue.js 설치 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- textarea -->
+      <p style="white-space: pre-line">{{ msg }}</p>
+      <textarea v-model="msg" placeholder="일단 쓰세요 !"></textarea>
+      <hr />
+      <!-- checkbox -->
+      <input type="checkbox" id="check" v-model="checked" />
+      <label for="check">체크상태 : {{ checked }}</label>
+      <hr />
+      <!-- checkbox가 여러 개일 경우, 배열에 체크된 value를 담아줌 -->
+      <input type="checkbox" id="a" value="aa" v-model="checkedNames" />
+      <label for="a">a</label>
+      <input type="checkbox" id="b" value="bb" v-model="checkedNames" />
+      <label for="b">b</label>
+      <input type="checkbox" id="c" value="cc" v-model="checkedNames" />
+      <label for="c">c</label>
+      <p>{{ checkedNames }}</p>
+      <hr />
+      <!-- radio는 0개 중에 하나 -->
+      <input type="radio" id="a2" value="a2" v-model="radio" />
+      <label for="a2">a2</label>
+      <input type="radio" id="b2" value="b2" v-model="radio" />
+      <label for="b2">b2</label>
+      <input type="radio" id="c2" value="c2" v-model="radio" />
+      <label for="c2">c2</label>
+      <p>{{ radio }}</p>
+      <hr />
+      <!-- select -->
+      <select v-model="selected">
+        <option value="">선택해주세요</option>
+        <option>a</option>
+        <option>b</option>
+        <option>c</option>
+      </select>
+      <strong>선택한 것 : {{ selected }}</strong>
+      <hr />
+      <!-- select의 multiple -->
+      <select v-model="selecteds" multiple>
+        <option value="">선택해주세요</option>
+        <option>a</option>
+        <option>b</option>
+        <option>c</option>
+      </select>
+      <strong>선택한 것 : {{ selecteds }}</strong>
+      <hr />
+      <select v-model="selected">
+        <option value="">선택해주세요</option>
+        <option v-for="(item, i) in selectItems" :key="i">
+          {{ item.text }}
+        </option>
+      </select>
+      <strong>선택한 것 : {{ selected }}</strong>
+      <hr />
+      <!-- checkbox true false가 아닌 원하는 값으로 -->
+      <input
+        type="checkbox"
+        id="check"
+        v-model="toggle"
+        true-value="배고파"
+        false-value="안 배고파"
+      />
+      <label for="check">체크상태 : {{ toggle }}</label>
+      <hr />
+      <!-- input text 숫자만 원할 경우 -->
+      <input type="text" v-model.number="age" placeholder="나이를 입력하세요" />
+      <p>{{ age }}</p>
+      <hr />
+      <!-- input text lazy (실시간 X)-->
+      <input type="text" v-model.lazy="textData" />
+      <p>{{ textData }}</p>
+    </div>
+
+    <script>
+      // Vue 인스턴스 생성
+      const myVue = new Vue({
+        // vue 관리 영역
+        el: '#app',
+        // 내가 원하는 데이터 입력
+        data: {
+          msg: '',
+          checked: false,
+          checkedNames: [],
+          radio: '',
+          selected: '',
+          selecteds: [],
+          selectItems: [
+            { text: 'One', value: 'A' },
+            { text: 'Two', value: 'B' },
+            { text: 'Three', value: 'C' },
+          ],
+          toggle: '',
+          age: 0,
+          textData: '',
+        },
+      });
+    </script>
+  </body>
+</html>
