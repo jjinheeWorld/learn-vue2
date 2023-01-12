@@ -13,28 +13,21 @@
           <strong>{{ item.name }}</strong>
           <label>단가 : <input type="number" v-model="item.cost" min="0"></label>
           <label>생산량 : <input type="number" v-model="item.production" min="0"></label>
-          <label>비용 : <span>{{ item.cost * item.production }}</span></label> <!-- 비용 = 단가 * 생산량 -->
+          <label>비용 : <span>{{ item.productionCost }}</span></label> <!-- 비용 = 단가 * 생산량 -->
         </li>
       </ul>
     </div>
     <div class="total">
-      <strong>부족분 : </strong><span>{{ shortfall }}</span> <!-- 부족분 = 수요 - 공장들의 생산량 -->
-      <strong>총수익 : </strong><span>{{ profit }}</span> <!-- 순이익 = 총매출(수요 * 가격) - 공장들의 비용 -->
+      <strong>부족분 : </strong><span>{{ ASIA.shortfall }}</span> <!-- 부족분 = 수요 - 공장들의 생산량 -->
+      <strong>총수익 : </strong><span>{{ ASIA.profit }}</span> <!-- 순이익 = 총매출(수요 * 가격) - 공장들의 비용 -->
     </div>
   </div>
 </template>
 
 <script>
-const data = {
-  name: 'Asia',
-  producers: [
-    {name: 'Byzantium', cost: 10, production: 9},
-    {name: 'Attalia', cost: 12, production: 20},
-    {name: 'Sinope', cost: 10, production: 6},
-  ],
-  demand: 30, // 수요
-  price: 20 // 가격
-}
+import { sampleData, province } from './erp/erp.js'
+
+const data = province(sampleData);
 
 export default {
   name: 'App',
@@ -43,22 +36,22 @@ export default {
       ASIA : '',
     }
   },
-  computed: {
-    shortfall() { // 부족분
-      let result = this.ASIA.demand; // 수요
-      this.ASIA.producers.forEach(p => { // forEach를 통해 수요에서 공장들의 생산량을 뺴준다.
-        result -= p.production;
-      })
-      return result;
-    },
-    profit() { // 총수익
-      let totalCost = 0; // 총비용
-      this.ASIA.producers.forEach(p => { // forEach를 통해 각 공장들의 비용을 더한다.
-        totalCost += p.cost * p.production; 
-    })
-      return (this.ASIA.demand * this.ASIA.price) - totalCost; // 총매출에서 공장들의 비용을 뺀다.
-    }
-  },
+  // computed: {
+  //   shortfall() { // 부족분
+  //     let result = this.ASIA.demand; // 수요
+  //     this.ASIA.producers.forEach(p => { // forEach를 통해 수요에서 공장들의 생산량을 뺴준다.
+  //       result -= p.production;
+  //     })
+  //     return result;
+  //   },
+  //   profit() { // 총수익
+  //     let totalCost = 0; // 총비용
+  //     this.ASIA.producers.forEach(p => { // forEach를 통해 각 공장들의 비용을 더한다.
+  //       totalCost += p.cost * p.production; 
+  //   })
+  //     return (this.ASIA.demand * this.ASIA.price) - totalCost; // 총매출에서 공장들의 비용을 뺀다.
+  //   }
+  // },
   created() {
     this.ASIA = data;
   }
