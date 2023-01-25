@@ -16,6 +16,12 @@
           <label>비용 : <span>{{ item.productionCost }}</span></label> <!-- 비용 = 단가 * 생산량 -->
         </li>
       </ul>
+      <div class="add">
+        <strong><label><input type="text" ref="name" placeholder="생산자 이름"></label></strong>
+        <label>단가 : <input type="number" ref="cost" value="0" min="0"></label>
+        <label>생산량 : <input type="number" ref="production" value="0" min="0"></label>
+        <button @click="add">등록</button>
+      </div>
     </div>
     <div class="total">
       <strong>부족분 : </strong><span>{{ ASIA.shortfall }}</span> <!-- 부족분 = 수요 - 공장들의 생산량 -->
@@ -36,22 +42,19 @@ export default {
       ASIA : '',
     }
   },
-  // computed: {
-  //   shortfall() { // 부족분
-  //     let result = this.ASIA.demand; // 수요
-  //     this.ASIA.producers.forEach(p => { // forEach를 통해 수요에서 공장들의 생산량을 뺴준다.
-  //       result -= p.production;
-  //     })
-  //     return result;
-  //   },
-  //   profit() { // 총수익
-  //     let totalCost = 0; // 총비용
-  //     this.ASIA.producers.forEach(p => { // forEach를 통해 각 공장들의 비용을 더한다.
-  //       totalCost += p.cost * p.production; 
-  //   })
-  //     return (this.ASIA.demand * this.ASIA.price) - totalCost; // 총매출에서 공장들의 비용을 뺀다.
-  //   }
-  // },
+  methods: {
+    add() {
+      this.ASIA.addProducer({
+        name: this.$refs.name.value,
+        cost: this.$refs.cost.value,
+        production: this.$refs.production.value,
+      })
+      // 등록 버튼 클릭 후, 초기화
+      this.$refs.name.value = '';
+      this.$refs.cost.value = 0;
+      this.$refs.production.value = 0;
+    }
+  },
   created() {
     this.ASIA = data;
   }
@@ -65,4 +68,7 @@ export default {
 .producers li input {width: 50px; margin-right: 20px;}
 .total {margin-left:40px}
 .total span {margin-right:20px;}
+.add {padding:0 0 20px 40px}
+.add input[type="text"] { width:70px; margin-right: 22px;}
+.add input[type="number"] { width:50px; margin-right: 20px;}
 </style>
